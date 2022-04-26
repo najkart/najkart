@@ -1,20 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import {
+  Provider as PaperProvider,
+  Appbar
+} from 'react-native-paper';
+import Appnavigator from './app/app.navigator';
+
+ 
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  //  <AlertScreenTest/>
+  // <AlertDetails />
+  // <MoviesScreen/>
+  <PaperProvider>
+    <Appnavigator/>
+  </PaperProvider>
+  
+  // <PaperProvider>
+  //     <NavigationContainer>
+  //           <Stack.Navigator
+  //           screenOptions={{
+  //             header: CustomNavigationBar,
+  //           }}
+  //           >
+  //             <Stack.Screen name="AlertsList" component={AlertScreenTest} options={{ title: 'Mes alertes' }} />
+  //             <Stack.Screen name="AlertDetails" component={AlertDetails}  options={{ title: 'Detail alerte' }} />
+  //           </Stack.Navigator>
+  //         </NavigationContainer> 
+  //   </PaperProvider>
+ 
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function CustomNavigationBar({ navigation, back }) {
+  // const [visible, setVisible] = react.useState(false);
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
+
+  return (
+    <Appbar.Header>
+      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
+      <Appbar.Content title="Forex Metrics" />
+     
+    </Appbar.Header>
+  );
+}
